@@ -7,11 +7,17 @@
   <div class="col-8">
     
     <h3>Napravi novi post</h3> <br>
-    <form action="{{ route ('home.savePost')}}" method="POST" enctype="multipart/form-data">
+  <form action="{{ route ('home.savePost')}}" method="POST" enctype="multipart/form-data">
         @csrf
 
         <input type="text" name="title" placeholder="naslov" class="form-control" /> <br>
+        @if ($errors->has('title'))
+         <span class="text-danger">{{ $errors->first('title') }}</span> <br>
+         @endif
         <textarea name="body" placeholder="text" class="form-control" cols="30" rows="10"></textarea> <br>
+        @if ($errors->has('body'))
+         <span class="text-danger">{{ $errors->first('body') }}</span> <br>
+         @endif
         <input type="file" name="image" class="fomr-control" /> <br> <br>
         <select name="category" class="form-control">
             @foreach ($all_categories as $category)
